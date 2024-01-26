@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0 auto;
+        padding: 5px;
+        text-align: center;
+        font-family: 'Courier New', Courier, monospace;
+    }
+</style>
+<body>
+    <h1 style="text-align: center; margin: 20px 0;">💸<br>weekly pay calculator</h1>
+    <table style="border: 1px solid black">
+        <colgroup>
+            <col style="width: 40%">
+            <col style="width: 60%">
+        </colgroup>
+
+        <tbody>
+            <tr>
+                <th style="text-align: right;">name</th>
+                <td><input type="text" name="" id="name" placeholder="name.." style="text-align: left;"></td>
+            </tr>
+            <tr>
+                <th style="text-align: right;">pay per hour</th>
+                <td><input type="text" name="" id="payperhour" placeholder="pay per hour.." style="text-align: left;"></td>
+            </tr>
+            <tr>
+                <th style="text-align: right;">work time</th>
+                <td><input type="text" name="" id="worktime" placeholder="work time.." style="text-align: left;"></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button type="button" id="btn" style="width: 100%;">check</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <div hidden id="result" style="border: 1px solid lightgray; height:fit-content; width: 300px;">💰</div>
+
+
+    <!-- another code
+    <fieldset style="width: fit-content;">
+        <legend>weekly pay calculator</legend><br>
+
+        <label for="name">name</label>
+        <input type="text" name="" id="name"><br><br>
+
+        <label for="name">pay per hour</label>
+        <input type="text" name="" id="per_pay"><br><br>
+        
+        <label for="name">work time</label>
+        <input type="text" name="" id="work_time"><br><br>
+
+        <button type="button" style="width: 80%;">check</button>
+
+        <div id="result"></div>
+    </fieldset> -->
+
+</body>
+</html>
+
+<script>
+    window.onload = function() {
+        var btn = document.getElementById("btn");
+        btn.addEventListener("click", () => {
+            let name = document.getElementById("name").value;
+            let pph = document.getElementById("payperhour").value;
+            let wt = document.getElementById("worktime").value;
+            
+            document.getElementById("result").hidden = false;
+            console.log(pph*wt);
+            if(name == "" || pph == "" || wt == "") {
+                document.getElementById("result").innerHTML = `please write values`;
+            }
+            else document.getElementById("result").innerHTML = `${name}'s weekly pay is $${pph*wt} !🤑`;
+        })
+    }
+    
+</script>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0 auto;
+        padding: 10px;
+        font-family: 'Courier New', Courier, monospace;
+        text-align: center;
+    }
+</style>
+<body>
+    <h1>🤡<br>i SORT you</h1>
+    <div style="align-items: center; align-content: center; text-align: center;">
+        <input type="text" name="" id="input" size="25" style="height: 30px;" placeholder="write nums with comma..">
+        <br>
+        <br>
+        <button type="button" id="btnSort" style="padding: 10px; font-weight: 600;">
+            &nbsp;sort&nbsp;
+        </button>
+        <br>
+        <br>
+        <div hidden id="result" style="border: 1px solid lightgray; width: fit-content; height:fit-content"></div>
+    </div>
+</body>
+</html>
+
+<script>
+    window.onload = function() {
+        var btn = document.getElementById("btnSort");
+
+        btn.addEventListener("click", () => {
+            let input = document.getElementById("input").value;
+            let nums = input.split(",");
+            nums = nums.map(n => parseInt(n));
+            
+            nums.sort((itm1, itm2) => itm1 - itm2);
+
+            
+            //sortedstr = nums.toString();
+            //automatically change to array without join
+            sortedstr = nums.join(', ');
+
+            console.log(sortedstr);
+            if(sortedstr == 'NaN') document.getElementById("result").innerHTML = `wrong value type<br>write again`;
+            else document.getElementById("result").innerHTML = `ascending sort ➡️ ${sortedstr}`;
+            document.getElementById("result").hidden = false;
+            
+        });
+    }
+</script>
