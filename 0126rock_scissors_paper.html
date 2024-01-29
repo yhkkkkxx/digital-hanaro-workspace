@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 20px auto;
+        text-align: center;
+        font-family: 'Courier New', Courier, monospace;
+    }
+    table {
+        border: 1.5px solid lightgray;
+        border-radius: 10px;
+        padding: 10px;
+        height: 80px;
+        font-size: large;
+        background-color: white;
+        display:inline-table;
+        margin: 20px;
+    }
+    th {
+        width: 100px;
+        height: fit-content;
+        padding: 10px 5px;
+    }
+    td {
+        height: 70px;
+        font-size: xxx-large;
+    }
+    .hand {
+        padding: 10px;
+        margin: 10px;
+        font-size: xxx-large;
+        background-color: transparent;
+        border: transparent;
+        cursor: pointer;
+    }
+    .hand:hover {
+        transform: scale(1.15);
+        transition: transform 0.3s ease;
+    }
+</style>
+<body>
+    <h1 style="font-size: 100px">🖥️ 🆚 🫵</h1>
+    <h1 style="font-weight: 400;">rock scissors paper</h1>
+    <hr style="border: 0.5px solid; margin: 30px 20px;"/>
+    <button type="button" id="start" style="font-size: medium; padding: 10px; margin: 0">start</button>
+    <div hidden id="game" style="font-weight: 500; font-size: large;">
+        what will you choose?<br>
+        <button type="button" id="rock" class="hand" onclick="user()">✊</button>
+        <button type="button" id="scissors" class="hand" onclick="user()">✌️</button>
+        <button type="button" id="paper" class="hand" onclick="user()">🖐️</button><br>
+
+        <table>
+            <tbody>
+                <tr>
+                    <th>computer</th>
+                </tr>
+                <tr>
+                    <td id="comp"></td>
+                </tr>
+            </tbody>
+        </table>
+        <table>
+            <tbody>
+                <tr>
+                    <th>you</th>
+                </tr>
+                <tr>
+                    <td id="user"></td>
+                </tr>
+            </tbody>
+        </table>
+
+
+        <br>
+        <div id="result" style="font-size: xxx-large; font-weight: 600;"></div>
+    </div>
+
+
+    
+</body>
+</html>
+
+<script>
+    window.onload = function() {
+        var start = document.getElementById("start");
+        start.addEventListener("click", () => {
+            document.getElementById("game").hidden = false;
+            start.remove();
+        });
+        
+    }
+    function user() {
+        let comp = Math.ceil(Math.random()*3);
+        let hands = ["", "✊", "✌️", "🖐️"];
+        
+        document.getElementById("comp").innerHTML = hands[comp];
+
+        let user = 0;
+        if(event.target.innerHTML == "✊") user = 1;
+        else if(event.target.innerHTML == "✌️") user = 2;
+        else if(event.target.innerHTML == "🖐️") user = 3;
+        document.getElementById("user").innerHTML = hands[user]; 
+
+        console.log(comp%3, user%3);
+        let result = user - comp + 3;
+
+        if(user >=1 && user <=3) {
+            if(result%3 == 0) document.getElementById("result").innerHTML = 'draw ..😇';
+            else if(result%3 == 2) document.getElementById("result").innerHTML = 'you win 🥳';
+            else if(result%3 == 1) document.getElementById("result").innerHTML = 'you lose 🤣';
+        }
+    }
+</script>
