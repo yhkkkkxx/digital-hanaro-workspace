@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        text-align: center;
+        font-family: 'Courier New', Courier, monospace;
+    }
+    h1 {
+        margin: 40px 0 0 0;
+    }
+    table {
+        border: 1px solid gray;
+        padding: 10px;
+        margin: 40px auto;
+    }
+    th, td {
+        padding: 5px 20px;
+    }
+    th {
+        padding-bottom: 10px;
+    }
+    #input {
+        padding: 10px;
+        text-align: right;
+    }
+    #money:hover {
+        transform: scale(1.15);
+        transition: transform 0.3s ease;
+    }
+    #btnChk {
+        padding: 10px;
+        font-weight: 600;
+    }
+</style>
+<body>
+    <h1 style="font-size: xxx-large;" id="money">💸</h1>
+    <h4>weekly pay calculator</h4>
+
+    <table>
+        <tbody>
+            <tr>
+                <th id="input">name</th>
+                <td id="input"><input type="text" name="" id="name" placeholder="name.." style="text-align: left;"></td>
+            </tr>
+            <tr>
+                <th id="input">time</th>
+                <td id="input"><input onkeydown="isNumber()" type="text" name="" id="time" placeholder="time.." style="text-align: left;"></td>
+            </tr>
+            <tr>
+                <th id="input">pay per hour</th>
+                <td id="input"><input onkeydown="isNumber()" type="text" name="" id="pph" placeholder="pay per hour.." style="text-align: left;"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button type="button" id="btnChk">add</button>
+
+    <table id="result" hidden>
+        <thead>
+            <tr>
+                <th>name</th>
+                <th>time</th>
+                <th>pay per hour</th>
+                <th>weekly pay</th>
+            </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+    </table>
+</body>
+</html>
+
+<script>
+    window.onload = () => {
+
+        document.querySelector("#btnChk").addEventListener("click", () => {
+            let name = document.querySelector("#name");
+            let time = document.querySelector("#time");
+            let pph = document.querySelector("#pph");
+
+            let item = {name: name.value, time: time.value, pph: pph.value};
+            
+            let wp = 0;
+            
+            if(!isNull(item)) {
+
+                if(item.time < 20) wp = item.time * item.pph;
+                else wp = item.time * item.pph * 1.5;
+                item.time = parseInt(item.time).toLocaleString();
+                item.pph = parseInt(item.pph).toLocaleString();
+                item["wp"] = parseInt(wp).toLocaleString();
+
+
+                let row = tbody.insertRow(tbody.rows.length);
+                let cell1 = row.insertCell(0);
+                let cell2 = row.insertCell(0);
+                let cell3 = row.insertCell(0);
+                let cell4 = row.insertCell(0);
+
+                cell1.innerHTML = item.wp;
+                cell2.innerHTML = item.pph;
+                cell3.innerHTML = item.time;
+                cell4.innerHTML = item.name;
+
+                document.querySelector("#name").value = null;
+                document.querySelector("#time").value = null;
+                document.querySelector("#pph").value = null;
+
+                document.querySelector("#result").hidden = false;
+            } else alert("write value");
+
+        });
+
+    }
+
+    function isNumber() {
+        console.log(event.key, event.keyCode);
+        if((event.key >= '0' && event.key <= '9') || event.keyCode == 8) event.returnValue = true;
+        else event.returnValue = false;
+    }
+
+    function isNull(item) {
+        if(item.name == "" || item.time == "" || item.pph == "") return true;
+        else return false;
+    }
+
+</script>
