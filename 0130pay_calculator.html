@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" 
+    integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" 
+    crossorigin="anonymous"></script>
+</head>
+<style>
+    * {
+        margin: 10px;
+        text-align: center;
+        font-family: 'Courier New', Courier, monospace;
+    }
+    table {
+        margin: 0 auto;
+    }
+    h1 {
+        margin: 30px 0 20px;
+    }
+    h4 {
+        margin: 20px;
+    }
+    table {
+        border: 1px solid gray;
+        padding: 20px;
+    }
+    th {
+        text-align: right;
+    }
+    input {
+        text-align: left;
+    }
+    button {
+        padding: 10px;
+        margin: 20px;
+    }
+    #money:hover {
+        transform: scale(1.15);
+        transition: transform 0.3s ease;
+    }
+</style>
+<body>
+    <h1 id="money">💸</h1>
+    <h4>weekly pay calculator</h4>
+    <table>
+        <tbody>
+            <tr>
+                <th>name</th>
+                <td><input type="text" name="" id="name"></td>
+            </tr>
+        </tbody>
+        <tbody>
+            <tr>
+                <th>work time</th>
+                <td><input type="text" name="" id="wt"></td>
+            </tr>
+        </tbody>
+        <tbody>
+            <tr>
+                <th>pay per hour</th>
+                <td><input type="text" name="" id="pph"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button type="button" id="btnSend">check</button>
+    <div id="result"> </div>
+
+</body>
+</html>
+<script>
+    document.querySelector("#btnSend").addEventListener("click", () => {
+        $.ajax({
+                url:"http://127.0.0.1:8080/payment",
+                method: "POST",
+                data: {name:$("#name").val(), wt:$("#wt").val(), pph:$("#pph").val()}
+            }) 
+        .done(res => {
+            console.log(res);
+            document.querySelector("#result").innerHTML=res.result;
+        })
+        .fail((error, msg, status) => {
+            console.log(msg);
+        });
+    });
+    
+</script>
