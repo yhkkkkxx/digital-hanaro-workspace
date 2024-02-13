@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    input {
+        width: 50px;
+    }
+</style>
+<body>
+    <h2>hello <br> i am calculator 🧮</h2>
+    <form action="" id="myform">
+        <input type="text" name="x" id="">
+        <select name="op" id="">
+            <option value="1">+</option>
+            <option value="2">-</option>
+            <option value="3">*</option>
+            <option value="4">/</option>
+        </select>
+        <input type="text" name="y" id="">
+        <br><br>
+        <button type="button" id="calcBtn">calculate</button>
+    </form>
+</body>
+</html>
+
+<script>
+    window.onload = () => {
+        document.getElementById("calcBtn").addEventListener("click", () => {
+            let frm = document.getElementById("myform");
+
+            frm.action = "/calc_result"
+            frm.method = "GET"
+            frm.submit();
+        });
+    }
+</script>
