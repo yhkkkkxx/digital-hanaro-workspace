@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@200;400;800&display=swap" rel="stylesheet">
+</head>
+<style>
+    * {
+        font-family: 'Noto Sans KR', sans-serif;
+        text-align: center;
+    }
+    table, th, td {
+        border: 1px solid #ddd;
+        padding: 10px;
+    }
+    table {
+        width: 80%;
+        border-collapse: collapse;
+        margin: 0 auto;
+    }
+</style>
+<body>
+    <h1>게시판</h1>
+
+    <table>
+        <% for(board of boardList) { %>
+            <tr>
+                <td><%= board.id %></td>
+                <td><a href="/board/view/<%=board.id%>" id="title"> <%= board.title %> </a></td>
+                <td><%= board.writer %></td>
+                <td><%= board.contents %></td>
+                <td><%= board.wdate %></td>
+            </tr>
+        <% } %>
+    </table>
+    <br>
+    <a href="/board/write">글쓰기</a>
+</body>
+</html>
