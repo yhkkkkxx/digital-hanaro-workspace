@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin    src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+</head>
+<style>
+    * {
+        font-family: 'Noto Sans KR', sans-serif;
+        text-align: center;
+    }
+    input {
+        margin: 5px;
+    }
+    button {
+        padding: 5px 7px;
+        margin: 6px;
+    }
+</style>
+<body>
+    <h1>Calculator🧮</h1>
+    <hr>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        ReactDOM.render (
+            <div> 
+                <Calc/>
+            </div>, //첫 번째 매개변수 - 트리 구조의 태그 집합
+            document.getElementById('root') //두 번째 매개변수 - 시작 태그 객체
+        );
+
+        function Calc() {
+            const [x, setX] = React.useState("");
+            const [y, setY] = React.useState("");
+            const [result, setResult] = React.useState("");
+
+            const keyChange = (e) => {
+                if(e.target.id == "x") setX(e.target.value);
+                else if(e.target.id == "y") setY(e.target.value);
+            }
+
+            
+            const addition = () => setResult((parseInt(x)+parseInt(y)).toLocaleString());
+            const subtraction = () => setResult((parseInt(x)-parseInt(y)).toLocaleString());
+            const multiplication = () => setResult((parseInt(x)*parseInt(y)).toLocaleString());
+            const division = () => setResult((parseInt(x)/parseInt(y)).toLocaleString());
+            
+
+
+            return (
+                <div>
+                    x <input type="text" id="x" value={x} onChange={keyChange}/> <br/>
+                    y <input type="text" id="y" value={y} onChange={keyChange}/> <br/>
+                    <h2>result {result}</h2>
+                    
+                    <button type="button" onClick={addition}>➕</button>
+                    <button type="button" onClick={subtraction}>➖</button>
+                    <button type="button" onClick={multiplication}>✖️</button>
+                    <button type="button" onClick={division}>➗</button>
+                </div>
+            );
+        }
+
+    </script>
+</body>
+</html>
