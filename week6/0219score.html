@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+ <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+ <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+ <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@200;400;800&display=swap" rel="stylesheet">
+
+</head>
+<style>
+    * {
+        text-align: center;
+        font-family: 'Noto Sans KR', sans-serif;
+    }
+    table {
+        margin: auto;
+    }
+    th {
+        text-align: right;
+    }
+    button {
+        margin: 10px 0 5px;
+    }
+    input {
+        text-align: left;
+        margin: 3px 5px;
+    }
+    #result_table {
+        visibility: hidden;
+        margin-top: 20px;
+    }
+    #result_table, #result_th, #result_td {
+        border: 1px solid lightslategray;
+        border-collapse: collapse;
+        padding: 10px;
+        text-align: center;
+    }
+</style>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        ReactDOM.render(
+            <div>
+                <App/>
+            </div>
+            ,document.getElementById('root')
+        ); 
+      
+        function App() {
+            const [sData, setSData] = React.useState({name:"", kscore:"", escore:"", mscore:""});
+            const [sDataList, setSDataList] = React.useState([]);
+
+            const {name, kscore, escore, mscore} = sData;
+            
+
+            const nameChange = (e) => {setSData({...sData, name:e.target.value})}
+            const kscoreChange = (e) => {setSData({...sData, kscore:e.target.value})}
+            const escoreChange = (e) => {setSData({...sData, escore:e.target.value})}
+            const mscoreChange = (e) => {setSData({...sData, mscore:e.target.value})}
+
+            const append = () => {
+                setSDataList(sDataList.concat(sData));
+                setSData({name:"", kscore:"", escore:"", mscore:""});
+                window.document.querySelector("#result_table").style.visibility = "visible"
+            }
+            return (
+                <>
+                    <h1>💯 score 💯</h1>
+                    <table>
+                        <tr>
+                            <th>name</th>
+                            <td><input type="text" value={name} onChange={nameChange}/></td>
+                        </tr>
+                        <tr>
+                            <th>kor score</th>
+                            <td><input type="text" value={kscore} onChange={kscoreChange}/></td>
+                        </tr>
+                        <tr>
+                            <th>eng score</th>
+                            <td><input type="text" value={escore} onChange={escoreChange}/></td>
+                        </tr>
+                        <tr>
+                            <th>math score</th>
+                            <td><input type="text" value={mscore} onChange={mscoreChange}/></td>
+                        </tr>
+                    </table> 
+                    <button type="button" onClick={append}>add</button> 
+                    <hr/>
+                    <table id="result_table">
+                        <tr>
+                            <th id="result_th">name</th> <th id="result_th">kor score</th> <th id="result_th">eng score</th> <th id="result_th">math score</th> <th id="result_th">total score</th> <th id="result_th">average score</th>
+                        </tr>                
+                        {
+                            sDataList.map((d, i) => {
+                                let total = parseInt(d.kscore) + parseInt(d.escore) + parseInt(d.mscore);
+                                let avg = (total/3).toFixed(1);
+                                return (
+                                    <tr key={i} id="result">
+                                        <td id="result_td">{d.name}</td>
+                                        <td id="result_td">{d.kscore}</td>
+                                        <td id="result_td">{d.escore}</td>
+                                        <td id="result_td">{d.mscore}</td>
+                                        <td id="result_td">{total}</td>
+                                        <td id="result_td">{avg}</td>
+                                    </tr>
+                                )
+                            })
+                        }
+                    </table>
+                </>
+            );
+        }
+
+        function CalcScore() {
+            return (
+                <>
+                
+                </>
+            );
+        }
+    </script>
+</body>
+</html>
