@@ -30,15 +30,12 @@
         text-align: left;
         margin: 3px 5px;
     }
-    #result_table {
-        visibility: hidden;
-        margin: 20px;
-    }
     #result_table, #result_th, #result_td {
         border: 1px solid lightslategray;
         border-collapse: collapse;
         padding: 10px;
         text-align: center;
+        margin: 20px;
     }
 </style>
 <body>
@@ -55,6 +52,7 @@
         function App() {
             const [sData, setSData] = React.useState({name:"", kscore:"", escore:"", mscore:""});
             const [sDataList, setSDataList] = React.useState([]);
+            const [tableVisible, setTableVisible] = React.useState(false);
 
             const {name, kscore, escore, mscore} = sData;
             
@@ -92,7 +90,7 @@
                     </table> 
                     <button type="button" onClick={append}>add</button> 
                     <hr/>
-                    <table id="result_table">
+                    <table id="result_table" style={{visibility: tableVisible ? 'visible' : 'hidden'}}>
                         <tr>
                             <th id="result_th">name</th> <th id="result_th">kor score</th> <th id="result_th">eng score</th> <th id="result_th">math score</th> <th id="result_th">total score</th> <th id="result_th">average score</th>
                         </tr>                
@@ -113,14 +111,6 @@
                             })
                         }
                     </table>
-                </>
-            );
-        }
-
-        function CalcScore() {
-            return (
-                <>
-                
                 </>
             );
         }
