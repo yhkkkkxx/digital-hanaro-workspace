@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@200;400;800&display=swap" rel="stylesheet">
+</head>
+<style>
+    * {
+        margin: 0 auto;
+        text-align: center;
+        font-family: 'Noto Sans KR', sans-serif;
+        color: #333;
+        padding: 10px 5px;
+    }
+    body {
+        background-color: #f4f4f9;
+    }
+    h1 {
+        margin: 0 0 20px;
+    }
+    table, th, td {
+        border: 1px solid #ddd;
+    }
+    table {
+        width: 80%;
+        border-collapse: collapse;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        color: black;
+        background-color: white;
+    }
+    th {
+        background-color: #408558;
+        color: #ffffff;
+    }
+    td {
+        text-align: right;
+    }
+    .total {
+        text-align: center;
+        background-color: #f4f4f9;
+    }
+</style>
+<body>
+    <h1>💸 weekly pay 💸</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>번호</th> <th>이름</th> <th>근무시간</th> <th>시간당급여액</th>
+                <th>기본액</th> <th>초과수당</th> <th>합계</th> <th>세액</th> <th>실지불액</th>
+            </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+    </table>
+</body>
+</html>
+<script>
+    window.onload = () => {
+        let tbody = document.getElementById("tbody");
+        let data ={
+            "base_time":20,
+            "list": [
+                {"id":1, "username":"홍길동", "work_time":40, "per_pay":10000}, 
+                {"id":2, "username":"송민헌", "work_time":20, "per_pay":20000},
+                {"id":3, "username":"장길산", "work_time":30, "per_pay":30000}, 
+                {"id":4, "username":"임꺽정", "work_time":10, "per_pay":40000}, 
+                {"id":5, "username":"강민구", "work_time":30, "per_pay":10000}
+            ]}; 
+
+        controlDataAndTable(data, tbody);
+    }
+
+    function controlDataAndTable(data, tbody) {
+        let all_total = 0;
+        data.list.forEach(item => {
+            const table_item = calculate(item, data.base_time);
+            all_total += parseInt(table_item.actual_pay.replace(/,/g, '')); 
+            addItems(tbody, table_item);
+        });
+        addAllTotal(tbody, all_total);
+    }
+
+    function calculate(item, base_time) {
+        const per_pay = item["per_pay"];
+        const basic_amount = item["work_time"] * per_pay;
+        let over_pay = 0;
+        if (base_time < item["work_time"]) over_pay = (item["work_time"] - base_time) * per_pay / 2;
+        const total = basic_amount + over_pay;
+        const tax = total * 0.033;
+        const actual_pay = total - tax;
+
+        return {
+            "id": item["id"],
+            "username": item["username"],
+            "work_time": item["work_time"].toLocaleString(),
+            "per_pay": per_pay.toLocaleString(),
+            "basic_amount": basic_amount.toLocaleString(),
+            "over_pay": over_pay.toLocaleString(),
+            "total": total.toLocaleString(),
+            "tax": tax.toLocaleString(),
+            "actual_pay": actual_pay.toLocaleString()
+        };
+    }
+
+    function addItems(tbody, table_item) {
+        let row = tbody.insertRow();
+        Object.keys(table_item).reverse().forEach(key => {
+            let cell = row.insertCell(0);
+            cell.innerHTML = table_item[key];
+            if (key === "id" || key === "username") {
+                cell.style.textAlign = "center";
+            }
+        });
+    }
+
+    function addAllTotal(tbody, all_total) {
+        let row = tbody.insertRow();
+        
+        let cell = row.insertCell(0);
+        cell.colSpan = 7;
+        cell.innerHTML = all_total.toLocaleString();
+        cell.classList.add("total");
+
+        cell = row.insertCell(0);
+        cell.colSpan = 3;
+        cell.innerHTML = "총지불액";
+        cell.classList.add("total");
+    }
+
+</script>

@@ -1,0 +1,69 @@
+.layout-navbar {
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: #333;
+    height: 80px;
+}
+
+.layout-navcontent {
+    display: flex;
+    position: fixed;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    background-color: #f7f7f7; 
+    border-bottom: 1px solid #e5e5e5;
+    padding: 30px;
+}
+
+.layout-left {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    font-size: 30px;
+    text-align: left;
+}
+
+.layout-logo {
+    width: 40px;
+    margin: 0;
+    text-align: center;
+}
+
+
+.layout-right {
+    width: 270px;
+    display:inline-block;
+    margin: 0;
+    justify-content: center;
+    margin-right: 45px;
+    text-align: right;
+    overflow: auto;
+}
+
+.layout-user {
+    text-align: right;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+
+.layout-logout-btn {
+    padding: 10px;
+    height: 40px;
+    margin-right: 20px;
+    background-color: #f7f7f7;
+    color: #333;
+    border: 2px solid #ca382c;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: 'hana-medium';
+}
+
+.layout-logout-btn:hover {
+    background-color: #ca382c;
+    color: white;
+}

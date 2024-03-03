@@ -1,0 +1,67 @@
+.photolist-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: #f7f7f7;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 1000px;
+    margin: auto;
+    margin: 100px auto 50px;
+  }
+
+  .photolist-album {
+    margin: 0 0 30px;
+  }
+
+  .photolist-back-btn {
+    padding: 10px 20px;
+    background-color: #409178;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: 'hana-bold';
+  }
+
+  .photolist-back-btn:hover {
+    background-color: #193a30;
+  }
+
+  .photolist-back-btn:disabled {
+    background-color: #efc8c5;
+  }
+
+  .photolist-back-btn:disabled:hover {
+    cursor: none;
+  }
+  
+  .photlist-hr {
+    width: 95%;
+  }
+
+  .photolist-list {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: center; 
+    padding: 10px;
+    margin-top: 10px;
+    gap: 20px; 
+  }
+
+  .photolist-photo {
+    width: 100px;
+    margin: 10px;
+    border-radius: 5px; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease; 
+  }
+
+  .photolist-photo:hover {
+    cursor: grab;
+    transform: scale(1.2);
+  }

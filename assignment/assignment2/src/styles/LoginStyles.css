@@ -1,0 +1,110 @@
+ .login-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: #f7f7f7;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 300px;
+    margin: auto;
+    margin-top: 130px;
+  }
+  
+  
+  .login-logo {
+    max-width: 120px;
+    margin: 10px 0 30px;
+    animation:ani 1s infinite alternate;  
+  }
+  
+  @keyframes ani{
+    0%{transform:translate(0,0);}
+    100%{transform:translate(0,30px);}
+  }  
+  
+ .login-title {
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .login-input {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: 'hana-medium';
+  }
+  
+  .login-btn {
+    padding: 10px 20px;
+    background-color: #ca382c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: 'hana-medium';
+  }
+  
+  .login-btn:hover {
+    background-color: #7d2219;
+  }
+
+  .login-msg {
+    margin: 10px;
+    color: #333;
+    text-align: center;
+    white-space: pre-wrap;
+  }
+
+  .login-warningbox {
+    margin: 10px;
+    color: #ca382c;
+    text-align: center;
+  }
+
+
+  .wave {
+    opacity: .4;
+    position: absolute;
+    bottom: auto;
+    left: auto;
+    background: #f7f7f7;
+    width: 600px;
+    height: 600px;
+    margin-left: 250px;
+    margin-top: 250px;
+    transform-origin: 50% 48%;
+    border-radius: 43%;
+    animation: drift 3000ms infinite linear;
+  }
+  
+  .wave.-three {
+    animation: drift 5000ms infinite linear;
+  }
+  
+  .wave.-two {
+    animation: drift 7000ms infinite linear;
+    opacity: .1;
+    background: rgb(177, 177, 177);
+  }
+  
+  .box:after {
+    content: '';
+    display: block;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(#e8a, 1), rgba(#def, 0) 80%, rgba(white, .5));
+    z-index: 11;
+    transform: translate3d(0, 0, 0);
+  }
+
+@keyframes drift {
+  from { transform: rotate(0deg); }
+  from { transform: rotate(360deg); }
+}
